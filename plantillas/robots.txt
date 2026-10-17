@@ -11,7 +11,9 @@
 #   B. Citas sí, entrenamiento no: descomenta el bloque de entrenamiento.
 #   C. Nada de IA: haz lo de la B y además cambia las reglas del grupo
 #      de búsqueda con IA por "Disallow: /". Las IA dejarán de citarte.
-#      Ni así sales de las AI Overviews de Google: usan Googlebot.
+#      Para salir también de las AI Overviews y del AI Mode de Google,
+#      robots.txt no sirve (usan Googlebot): usa el control de IA
+#      generativa de la configuración de Search Console.
 #
 # Cómo funciona robots.txt (RFC 9309): cada bot obedece SOLO al grupo
 # más específico que lo nombra. Si un bot tiene grupo propio, ignora
@@ -38,8 +40,9 @@ Allow: /wp-admin/admin-ajax.php
 # decisión explícita.
 #
 # Ojo: OpenAI y Perplexity avisan de que sus bots "-User" pueden no
-# respetar robots.txt, porque actúan a petición de una persona. Si
-# necesitas bloquearlos de verdad, hazlo en el firewall o en el CDN.
+# respetar robots.txt, porque actúan a petición de una persona (Meta
+# dice lo mismo de Meta-ExternalFetcher). Si necesitas bloquearlos de
+# verdad, hazlo en el firewall o en el CDN.
 
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
@@ -55,6 +58,8 @@ Allow: /wp-admin/admin-ajax.php
 # Googlebot alimenta Google Search, las AI Overviews y el AI Mode.
 # Bingbot alimenta Bing y Copilot. Bloquearlos te saca del buscador,
 # así que no tienen grupo aquí: siguen las reglas generales.
+# Para excluirte solo de las funciones de IA de Google, usa el control
+# de IA generativa de Search Console, no robots.txt.
 
 # --- BOTS DE ENTRENAMIENTO (te leen para entrenar modelos) ---
 # Postura A (permitir): deja este bloque comentado. Sin regla, entran.
@@ -101,8 +106,10 @@ Sitemap: https://ejemplo.com/sitemap.xml
 
 # Ojo: esta lista de bots cambia con los meses. Revísala cada
 # cierto tiempo. Fuentes oficiales:
-# - OpenAI: https://platform.openai.com/docs/bots
+# - OpenAI: https://developers.openai.com/api/docs/bots
 # - Anthropic: https://support.claude.com/en/articles/8896518
 # - Perplexity: https://docs.perplexity.ai/docs/resources/perplexity-crawlers
-# - Google: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers
+# - Google: https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
+# - Meta: https://developers.facebook.com/documentation/sharing/webmasters/web-crawlers
+# - Apple: https://support.apple.com/en-us/119829
 # - Content Signals: https://blog.cloudflare.com/content-signals-policy/

@@ -44,6 +44,14 @@ No es una muestra representativa de nada: es una cartera real, con sus aciertos 
 
 ## Cómo replicar esta auditoría en tus dominios
 
+La forma rápida es el script [scripts/auditoria-geo.sh](../scripts/auditoria-geo.sh), que hace todas las comprobaciones de golpe y devuelve una tabla como la de arriba:
+
+```bash
+./scripts/auditoria-geo.sh tudominio.com otrodominio.es
+```
+
+Si prefieres ir paso a paso:
+
 ```bash
 # ¿Existe robots.txt y qué dice de bots de IA?
 curl -s https://tudominio.com/robots.txt

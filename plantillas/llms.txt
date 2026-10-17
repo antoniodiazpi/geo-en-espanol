@@ -34,5 +34,5 @@ Reglas prácticas:
 - Solo enlaces que funcionen y con descripciones reales.
 - Actualízalo cuando cambie tu contenido importante.
 - Comprueba que se sirve como texto (text/plain o text/markdown) y no como una página HTML de error.
-- No esperes tráfico de él: hoy casi ningún bot de IA lo solicita (Ahrefs, 2026). Es una apuesta barata, no una palanca.
+- No esperes tráfico de él: hoy casi ningún bot de IA lo solicita (Ahrefs, 2026) y Google dice que su buscador no lo usa. Es una apuesta barata, no una palanca.
 -->
