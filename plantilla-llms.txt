@@ -1,0 +1,36 @@
+# NOMBRE DEL SITIO
+
+<!-- Obligatorio: un H1 con el nombre del proyecto o sitio. Es la única sección exigida por la especificación (llmstxt.org). -->
+
+> Resumen de una o dos frases: qué es el sitio, para quién es y qué ofrece. Este bloque es lo primero que una IA usa para entender de qué va todo lo demás.
+
+<!-- Debajo del resumen puedes añadir un párrafo de contexto: cobertura geográfica, idiomas, desde cuándo existe. Sin formato, solo texto. -->
+
+## Páginas principales
+
+- [Título de la página](https://ejemplo.com/pagina): qué encontrará ahí quien la lea
+- [Otra página](https://ejemplo.com/otra): una descripción breve y honesta
+
+## Servicios
+
+- [Servicio 1](https://ejemplo.com/servicio-1): qué incluye y para quién
+- [Servicio 2](https://ejemplo.com/servicio-2): qué incluye y para quién
+
+## Datos y recursos
+
+- [Estudio o recurso propio](https://ejemplo.com/estudio): de qué va y qué datos tiene
+
+## Optional
+
+<!-- Por convención, la sección "Optional" es para enlaces secundarios que un agente puede saltarse cuando necesita contexto corto. -->
+
+- [Blog](https://ejemplo.com/blog)
+- [Contacto](https://ejemplo.com/contacto)
+
+<!--
+Reglas prácticas:
+- Corto. Si pasa de unos pocos KB, es demasiado largo. Es un índice, no un volcado de tu web.
+- Solo enlaces que funcionen y con descripciones reales.
+- Actualízalo cuando cambie tu contenido importante.
+- No esperes tráfico de él: hoy casi ningún bot de IA lo solicita (Ahrefs, 2026). Es una apuesta barata, no una palanca.
+-->
