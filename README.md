@@ -43,7 +43,7 @@ Pull requests bienvenidas: correcciones, casos con datos, traducciones de planti
 
 ## Licencia
 
-CC BY 4.0. Puedes usar y adaptar todo citando a TrailSEO con enlace.
+MIT License. Puedes usar y adaptar todo citando a TrailSEO con enlace.
 
 ## Fuentes
 
