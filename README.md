@@ -10,11 +10,13 @@ GEO (Generative Engine Optimization) es el conjunto de prácticas para que los b
 
 ## Qué contiene este repositorio
 
-- **checklist-geo.md**: la lista completa de comprobaciones, ordenada por impacto.
-- **plantillas/llms.txt**: plantilla comentada siguiendo la especificación de llmstxt.org.
-- **plantillas/robots.txt**: plantilla con los bots de IA explicados uno a uno y tres posturas posibles.
-- **prompts/medicion-citas-ia.md**: método y prompts para medir cada semana si las IA te citan.
-- **datos/auditoria-17-dominios.md**: auditoría real a 17 dominios propios, con tabla, conclusiones y los comandos para replicarla.
+- [**checklist-geo.md**](checklist-geo.md): la lista completa de comprobaciones, ordenada por impacto.
+- [**plantillas/llms.txt**](plantillas/llms.txt): plantilla comentada siguiendo la especificación de llmstxt.org.
+- [**plantillas/robots.txt**](plantillas/robots.txt): plantilla con los bots de IA explicados uno a uno y tres posturas posibles.
+- [**prompts/medicion-citas-ia.md**](prompts/medicion-citas-ia.md): método y prompts para medir cada semana si las IA te citan.
+- [**datos/auditoria-17-dominios.md**](datos/auditoria-17-dominios.md): auditoría real a 17 dominios propios, con tabla, conclusiones y los comandos para replicarla.
+
+Última revisión: octubre de 2026. Los bots y las herramientas cambian cada pocos meses; si ves algo desactualizado, abre una issue.
 
 ## Lo que sabemos y lo que no (sin humo)
 
@@ -43,7 +45,7 @@ Pull requests bienvenidas: correcciones, casos con datos, traducciones de planti
 
 ## Licencia
 
-MIT License. Puedes usar y adaptar todo citando a TrailSEO con enlace.
+[MIT License](LICENSE). Puedes usar, copiar y adaptar todo, también con fines comerciales, siempre que mantengas el aviso de copyright. Si te resulta útil, se agradece una mención a TrailSEO con enlace.
 
 ## Fuentes
 
@@ -51,3 +53,8 @@ MIT License. Puedes usar y adaptar todo citando a TrailSEO con enlace.
 - Estudio de adopción de llms.txt (Ahrefs, 2026): https://ahrefs.com/blog/llmstxt-study/
 - Bots de OpenAI (GPTBot, OAI-SearchBot, ChatGPT-User): https://platform.openai.com/docs/bots
 - Rastreadores de Google, incluido Google-Extended: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers
+- Bots de Anthropic (ClaudeBot, Claude-User, Claude-SearchBot): https://support.claude.com/en/articles/8896518
+- Bots de Perplexity (PerplexityBot, Perplexity-User): https://docs.perplexity.ai/docs/resources/perplexity-crawlers
+- Content Signals Policy (Cloudflare): https://blog.cloudflare.com/content-signals-policy/
+- Los bots de IA no ejecutan JavaScript (Vercel): https://vercel.com/blog/the-rise-of-the-ai-crawler
+- Estándar robots.txt (RFC 9309): https://www.rfc-editor.org/rfc/rfc9309
