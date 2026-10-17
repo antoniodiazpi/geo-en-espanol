@@ -1,0 +1,115 @@
+# robots.txt con bots de IA explicados (octubre de 2026)
+#
+# Primera decisión: ¿quieres que las IA te citen en sus respuestas?
+# Para eso tienen que poder leerte los bots de BÚSQUEDA.
+# Segunda decisión, independiente: ¿les dejas usar tu contenido
+# para ENTRENAR sus modelos? Son bots distintos y puedes
+# permitir lo primero y bloquear lo segundo.
+#
+# Tres posturas posibles:
+#   A. Todo permitido (citas y entrenamiento): deja el archivo tal cual.
+#   B. Citas sí, entrenamiento no: descomenta el bloque de entrenamiento.
+#   C. Nada de IA: haz lo de la B y además cambia las reglas del grupo
+#      de búsqueda con IA por "Disallow: /". Las IA dejarán de citarte.
+#      Para salir también de las AI Overviews y del AI Mode de Google,
+#      robots.txt no sirve (usan Googlebot): usa el control de IA
+#      generativa de la configuración de Search Console.
+#
+# Cómo funciona robots.txt (RFC 9309): cada bot obedece SOLO al grupo
+# más específico que lo nombra. Si un bot tiene grupo propio, ignora
+# por completo las reglas de "User-agent: *". Por eso las reglas
+# generales se repiten en el grupo de búsqueda con IA. Si añades una
+# regla general, añádela también allí.
+
+# --- REGLAS GENERALES (bots sin grupo propio) ---
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+# Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# --- BOTS DE BÚSQUEDA CON IA (te leen para citarte) ---
+# OAI-SearchBot: índice de búsqueda de ChatGPT.
+# ChatGPT-User: lecturas en directo cuando un usuario de ChatGPT lo pide.
+# Claude-SearchBot: índice de búsqueda de Claude (Anthropic).
+# Claude-User: lecturas en directo cuando un usuario de Claude lo pide.
+# PerplexityBot: índice de Perplexity.
+# Perplexity-User: lecturas en directo cuando un usuario de Perplexity lo pide.
+#
+# Para aparecer en respuestas, NO los bloquees. Sin este grupo
+# entrarían igual (con las reglas generales); escribirlo deja la
+# decisión explícita.
+#
+# Ojo: OpenAI y Perplexity avisan de que sus bots "-User" pueden no
+# respetar robots.txt, porque actúan a petición de una persona (Meta
+# dice lo mismo de Meta-ExternalFetcher). Si necesitas bloquearlos de
+# verdad, hazlo en el firewall o en el CDN.
+
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+# Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# --- BUSCADORES CLÁSICOS QUE TAMBIÉN ALIMENTAN IA ---
+# Googlebot alimenta Google Search, las AI Overviews y el AI Mode.
+# Bingbot alimenta Bing y Copilot. Bloquearlos te saca del buscador,
+# así que no tienen grupo aquí: siguen las reglas generales.
+# Para excluirte solo de las funciones de IA de Google, usa el control
+# de IA generativa de Search Console, no robots.txt.
+
+# --- BOTS DE ENTRENAMIENTO (te leen para entrenar modelos) ---
+# Postura A (permitir): deja este bloque comentado. Sin regla, entran.
+# Posturas B y C (bloquear entrenamiento): quita las almohadillas.
+#
+# GPTBot: entrenamiento de OpenAI.
+# ClaudeBot: entrenamiento de Anthropic.
+# Google-Extended: no es un bot, es una señal. Controla si Google usa
+#   tu contenido para entrenar Gemini y para el grounding de la app
+#   de Gemini (así que bloquearlo puede restarte citas en Gemini).
+#   No afecta a Google Search ni a las AI Overviews.
+# CCBot: Common Crawl, un archivo abierto con el que se entrenan
+#   muchos modelos.
+# Bytespider: ByteDance (TikTok). Hay informes de que no siempre
+#   respeta robots.txt.
+# Amazonbot: Amazon (Alexa y sus modelos).
+# Meta-ExternalAgent: entrenamiento de Meta.
+# Applebot-Extended: no es un bot, es una señal. Le dice a Apple que
+#   no entrene con lo que rastrea Applebot.
+
+# User-agent: GPTBot
+# User-agent: ClaudeBot
+# User-agent: Google-Extended
+# User-agent: CCBot
+# User-agent: Bytespider
+# User-agent: Amazonbot
+# User-agent: Meta-ExternalAgent
+# User-agent: Applebot-Extended
+# Disallow: /
+
+# --- SEÑALES DE CONTENIDO (opcional, declaración explícita) ---
+# Content-Signal es una propuesta de Cloudflare (2025), no un estándar:
+# declara tu postura, pero ningún bot está obligado a respetarla.
+# Tres valores, cada uno yes o no:
+#   search: índices de búsqueda (enlaces y fragmentos, sin resúmenes de IA)
+#   ai-input: uso en respuestas generativas (RAG, grounding)
+#   ai-train: entrenamiento de modelos
+# Para usarla, descomenta la línea Content-Signal de cada grupo de
+# arriba: solo vale para el grupo en el que está. La del ejemplo
+# dice "citas sí, entrenamiento no" (postura B); para la postura A,
+# pon ai-train=yes.
+
+Sitemap: https://ejemplo.com/sitemap.xml
+
+# Ojo: esta lista de bots cambia con los meses. Revísala cada
+# cierto tiempo. Fuentes oficiales:
+# - OpenAI: https://developers.openai.com/api/docs/bots
+# - Anthropic: https://support.claude.com/en/articles/8896518
+# - Perplexity: https://docs.perplexity.ai/docs/resources/perplexity-crawlers
+# - Google: https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
+# - Meta: https://developers.facebook.com/documentation/sharing/webmasters/web-crawlers
+# - Apple: https://support.apple.com/en-us/119829
+# - Content Signals: https://blog.cloudflare.com/content-signals-policy/
