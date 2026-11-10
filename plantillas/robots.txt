@@ -1,4 +1,4 @@
-# robots.txt con bots de IA explicados (octubre de 2026)
+# robots.txt con bots de IA explicados (noviembre de 2026)
 #
 # Primera decisión: ¿quieres que las IA te citen en sus respuestas?
 # Para eso tienen que poder leerte los bots de BÚSQUEDA.
@@ -34,15 +34,22 @@ Allow: /wp-admin/admin-ajax.php
 # Claude-User: lecturas en directo cuando un usuario de Claude lo pide.
 # PerplexityBot: índice de Perplexity.
 # Perplexity-User: lecturas en directo cuando un usuario de Perplexity lo pide.
+# Amzn-SearchBot: búsqueda de Amazon (Alexa). No entrena modelos.
+# Amzn-User: lecturas en directo cuando un usuario de Alexa lo pide.
 #
 # Para aparecer en respuestas, NO los bloquees. Sin este grupo
 # entrarían igual (con las reglas generales); escribirlo deja la
 # decisión explícita.
 #
-# Ojo: OpenAI y Perplexity avisan de que sus bots "-User" pueden no
-# respetar robots.txt, porque actúan a petición de una persona (Meta
-# dice lo mismo de Meta-ExternalFetcher). Si necesitas bloquearlos de
-# verdad, hazlo en el firewall o en el CDN.
+# Ojo: OpenAI, Perplexity y Amazon avisan de que sus bots "-User"
+# pueden no respetar robots.txt, porque actúan a petición de una
+# persona. Lo mismo vale para Meta-ExternalFetcher y para Google-Agent,
+# el agente de Google que navega y hace tareas por el usuario. Si
+# necesitas bloquearlos de verdad, hazlo en el firewall o en el CDN.
+#
+# Si anuncias en ChatGPT (en España desde agosto de 2026; también en
+# México, Argentina, Colombia, Chile o Perú), no bloquees OAI-AdsBot:
+# revisa las páginas de destino de tus anuncios.
 
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
@@ -50,6 +57,8 @@ User-agent: Claude-SearchBot
 User-agent: Claude-User
 User-agent: PerplexityBot
 User-agent: Perplexity-User
+User-agent: Amzn-SearchBot
+User-agent: Amzn-User
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 # Content-Signal: search=yes, ai-input=yes, ai-train=no
@@ -59,7 +68,9 @@ Allow: /wp-admin/admin-ajax.php
 # Bingbot alimenta Bing y Copilot. Bloquearlos te saca del buscador,
 # así que no tienen grupo aquí: siguen las reglas generales.
 # Para excluirte solo de las funciones de IA de Google, usa el control
-# de IA generativa de Search Console, no robots.txt.
+# de IA generativa de Search Console, no robots.txt. En Bing, a partir
+# del 1 de febrero de 2027, el uso en respuestas de IA (grounding) se
+# decide página a página, no en robots.txt.
 
 # --- BOTS DE ENTRENAMIENTO (te leen para entrenar modelos) ---
 # Postura A (permitir): deja este bloque comentado. Sin regla, entran.
@@ -75,7 +86,8 @@ Allow: /wp-admin/admin-ajax.php
 #   muchos modelos.
 # Bytespider: ByteDance (TikTok). Hay informes de que no siempre
 #   respeta robots.txt.
-# Amazonbot: Amazon (Alexa y sus modelos).
+# Amazonbot: Amazon. Lo que rastrea puede usarse para entrenar sus
+#   modelos (para la búsqueda de Alexa está Amzn-SearchBot, arriba).
 # Meta-ExternalAgent: entrenamiento de Meta.
 # Applebot-Extended: no es un bot, es una señal. Le dice a Apple que
 #   no entrene con lo que rastrea Applebot.
@@ -88,6 +100,21 @@ Allow: /wp-admin/admin-ajax.php
 # User-agent: Amazonbot
 # User-agent: Meta-ExternalAgent
 # User-agent: Applebot-Extended
+# Disallow: /
+
+# --- SEÑAL COMÚN DE NO ENTRENAMIENTO (nueva, octubre de 2026) ---
+# Un solo grupo para decir "no entrenéis con mi contenido" a varias
+# empresas a la vez. Anthropic la respeta desde el 30/10/2026; OpenAI
+# dice que "en los próximos meses", Google a principios de 2027 y
+# Microsoft desde el 1/2/2027. Sale de un borrador del IETF (AIPREF):
+# todavía no es un estándar.
+# Es una preferencia de uso, no impide rastrear: mantén también las
+# reglas por bot de arriba.
+# Ojo con Google: si usas esta señal y no nombras a Google-Extended,
+# Google lo tratará como un bloqueo de Google-Extended, y eso también
+# te quita las citas por grounding en la app de Gemini.
+
+# User-agent: __usage_ai-training
 # Disallow: /
 
 # --- SEÑALES DE CONTENIDO (opcional, declaración explícita) ---
@@ -112,4 +139,7 @@ Sitemap: https://ejemplo.com/sitemap.xml
 # - Google: https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
 # - Meta: https://developers.facebook.com/documentation/sharing/webmasters/web-crawlers
 # - Apple: https://support.apple.com/en-us/119829
+# - Amazon: https://developer.amazon.com/amazonbot
+# - Microsoft (Bing): https://www.bing.com/webmasters/help/new-ai-preferences-2t1cc16d
+# - Señal común de entrenamiento: https://developers.google.com/search/blog/2026/10/ai-training-control
 # - Content Signals: https://blog.cloudflare.com/content-signals-policy/

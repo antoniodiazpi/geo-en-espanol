@@ -19,7 +19,9 @@ if [ "$#" -eq 0 ]; then
 fi
 
 ua='Mozilla/5.0 (compatible; auditoria-geo/1.0; +https://github.com/antoniodiazpi/geo-en-espanol)'
-bots_ia='gptbot oai-searchbot chatgpt-user claudebot claude-searchbot claude-user perplexitybot perplexity-user google-extended ccbot bytespider amazonbot meta-externalagent applebot-extended'
+bots_ia='gptbot oai-searchbot chatgpt-user claudebot claude-searchbot claude-user perplexitybot perplexity-user amzn-searchbot amzn-user google-extended ccbot bytespider amazonbot meta-externalagent applebot-extended'
+# Señal común de no entrenamiento (borrador IETF AIPREF, octubre de 2026).
+senal_entrenamiento='__usage_ai-training'
 
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
@@ -39,7 +41,7 @@ es_html() {
 # Sigue la lógica de RFC 9309: varias líneas User-agent seguidas comparten
 # reglas, y un bot con grupo propio ignora el grupo "*".
 bots_bloqueados() {
-  awk -v bots="$bots_ia" '
+  awk -v bots="$bots_ia" -v senal="$senal_entrenamiento" '
     function cerrar_grupo(   i) {
       for (i = 1; i <= na; i++) {
         con_grupo[agentes[i]] = 1
@@ -71,8 +73,14 @@ bots_bloqueados() {
         b = (lista[i] in con_grupo) ? (lista[i] in bloqueado) : ("*" in bloqueado)
         if (b) { salida = salida (salida == "" ? "" : ", ") lista[i]; total++ }
       }
-      if (total == n) print "Todos"
-      else print (salida == "" ? "No" : salida)
+      if (total == n) salida = "Todos"
+      else if (salida == "") salida = "No"
+      # La señal común solo cuenta si tiene su propio grupo: "*" no la activa.
+      if ((senal in con_grupo) && (senal in bloqueado)) {
+        if (salida == "No") salida = "Solo la señal común de no entrenamiento"
+        else salida = salida " + señal común de no entrenamiento"
+      }
+      print salida
     }
   ' "$tmp/robots"
 }
